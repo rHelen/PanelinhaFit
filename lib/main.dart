@@ -34,8 +34,8 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('../assets/imgfigma.png'), // Caminho para sua imagem
-              fit: BoxFit.cover, // Ajusta a imagem para cobrir todo o container
+              image: AssetImage('../assets/imgfigma.png'),
+              fit: BoxFit.cover,
             ),
           ),
         child: Column(
@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Fit',
               style: TextStyle(
-                color: Colors.white, // Definindo a cor azul para a fonte
+                color: Colors.white,
               ),
             ),
             TextField(
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                 if(email=='email.com' && password=='123'){
                    Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SegundaTela2()),
+                    MaterialPageRoute(builder: (context) => SegundaTela()),
                   );
                 }
                 _login();
@@ -89,16 +89,26 @@ class _LoginPageState extends State<LoginPage> {
               icon: Icon(Icons.keyboard_arrow_right),
               label: Text(''),
             ),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CadastroPage()),
+                  );
+              },
+              icon: Icon(Icons.keyboard_arrow_right),
+              label: Text('Cadastro'),
+            ),
             Text(
               'Cadastro',
               style: TextStyle(
-                color: Colors.white, // Definindo a cor azul para a fonte
+                color: Colors.white,
               ),
             ),
             Text(
               'Esqueci minha senha',
               style: TextStyle(
-                color: Colors.white, // Definindo a cor azul para a fonte
+                color: Colors.white,
               ),
             )
           ],
@@ -159,34 +169,29 @@ class SegundaTela2 extends StatelessWidget {
             ListTile(
               title: Text('Item 1'),
               onTap: () {
-                // implementação para o item 1
               },
             ),
             ListTile(
               title: Text('Item 2'),
               onTap: () {
-                // implementação para o item 2
               },
             ),
-            // Adicione mais itens do menu conforme necessário
           ],
         ),
       ),
       body: Column(
         children: <Widget>[
-          // Adiciona a imagem na parte superior da tela
           Image.asset(
             'assets/logopanelinha.png',
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
           ),
-          // Conteúdo restante
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Text(
-                  'Texto acima das imagens',
+                  'Treinos',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 Row(
@@ -196,12 +201,12 @@ class SegundaTela2 extends StatelessWidget {
                     Column(
                       children: <Widget>[
                         CircleAvatar(
-                          backgroundImage: AssetImage('assets/image1.png'),
+                          backgroundImage: AssetImage('assets/treinocostas.jpg'),
                           radius: 40,
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'texto abaixo de uma imagem',
+                          'Costas',
                           style: TextStyle(color: Colors.white),
                         ),
                       ],
@@ -212,7 +217,7 @@ class SegundaTela2 extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20), // Espaçamento entre as imagens e a parte inferior da tela
+                SizedBox(height: 20),
               ],
             ),
           ),
@@ -245,6 +250,253 @@ class _MinhaTelaState extends State<MinhaTela> {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
     ),
+      ),
+    );
+  }
+}
+
+//Tela de Cadastro
+class CadastroPage extends StatefulWidget {
+  @override
+  _CadastroPageState createState() => _CadastroPageState();
+}
+
+class _CadastroPageState extends State<CadastroPage> {
+  TextEditingController _nomeController = TextEditingController();
+  TextEditingController _sobrenomeController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _senhaController = TextEditingController();
+  TextEditingController _confirmarSenhaController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Criar Conta'),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _nomeController,
+              decoration: InputDecoration(labelText: 'Nome'),
+            ),
+            TextField(
+              controller: _sobrenomeController,
+              decoration: InputDecoration(labelText: 'Sobrenome'),
+            ),
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email'),
+            ),
+            TextField(
+              controller: _senhaController,
+              decoration: InputDecoration(labelText: 'Senha'),
+              obscureText: true,
+            ),
+            TextField(
+              controller: _confirmarSenhaController,
+              decoration: InputDecoration(labelText: 'Confirmar Senha'),
+              obscureText: true,
+            ),
+            SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                _cadastrar();
+              },
+              child: Text('Cadastrar'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _cadastrar() {
+    String nome = _nomeController.text;
+    String sobrenome = _sobrenomeController.text;
+    String email = _emailController.text;
+    String senha = _senhaController.text;
+    String confirmarSenha = _confirmarSenhaController.text;
+
+    // Validar os dados aqui, por exemplo, verificar se as senhas coincidem
+
+    // Se os dados estiverem válidos, você pode salvar os dados do usuário
+
+    // Após o cadastro, redirecione para a tela de login
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
+  }
+}
+
+//Tela Inicial
+class SegundaTela extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF040116),
+      ),
+      drawer: Drawer(
+        child: Container(
+          color: Colors.black.withOpacity(0.95),
+          child: ListView(            
+            children: [
+              ListTile(
+                title: Text(
+                  'Perfil',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Divider(color: Colors.white),
+              ListTile(
+                title: Text(
+                  'Treinos recentes',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Divider(color: Colors.white),
+              ListTile(
+                title: Text(
+                  'Ranking Camarada',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Divider(color: Colors.white),
+              ListTile(
+                title: Text(
+                  'Ranking Global',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Divider(color: Colors.white),
+              ListTile(
+                title: Text(
+                  'Sair',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: Container(
+        color: Color(0xFF040116),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(1.0),
+              child: CircleAvatar(
+                radius: 110, // Alterado para 250 pixels
+                backgroundImage: AssetImage('logopanelinha.png'),
+                backgroundColor: Colors.transparent,
+              ),
+            ),
+            Text(
+              'Treinos',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+            SizedBox(height: 10),
+            Container(
+              height: 1,
+              width: MediaQuery.of(context).size.width * 0.8,
+              color: Colors.white,
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        print('Botão Peito Pressionado!');
+                        // Aqui você pode adicionar a lógica para quando o botão de Peito for pressionado
+                      },
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage('peito.jpg'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+                    Text(
+                      'Peito',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        print('Botão Costas Pressionado!');
+                        // Aqui você pode adicionar a lógica para quando o botão de Costas for pressionado
+                      },
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage('costas.jpg'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+                    Text(
+                      'Costas',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        print('Botão Perna Pressionado!');
+                        // Aqui você pode adicionar a lógica para quando o botão de Perna for pressionado
+                      },
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage('perna.jpg'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+                    Text(
+                      'Perna',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        print('Botão Cardio Pressionado!');
+                        // Aqui você pode adicionar a lógica para quando o botão de Cardio for pressionado
+                      },
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage('cardio.jpg'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+                    Text(
+                      'Cardio',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
